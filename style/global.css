@@ -1,12 +1,3 @@
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
 
 .hero-section {
     position: relative;
@@ -42,8 +33,24 @@ section .menu-bar{
 }
 
 section .menu-bar .menu-option{
+    color: black;
+    text-decoration: none;
+    transition: 0.6s;
     padding: 16px 6px;
     font-size: 20px;
+    cursor: pointer;
+}
+
+section .menu-bar #checked{
+    background-color: rgb(212, 212, 212);
+}
+
+section .menu-bar #checked:hover{
+    background-color: rgb(226, 226, 226);
+}
+
+section .menu-bar .menu-option:hover{
+    background-color: rgb(199, 199, 199);
 }
 
 .navbar-nav{
