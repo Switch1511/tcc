@@ -1,4 +1,12 @@
+/* Header */
+header{
+    background-color: white;
+    color: black;
+    padding: 1rem;
+}
 
+
+/*  */
 .hero-section {
     position: relative;
     background-image: url('../img/496f8bf4807f35529efb5cc4afbc87d2.png');
@@ -22,7 +30,6 @@
 .search-bar {
     width: 100%;
     max-width: 500px;
-    margin: 0 auto;
 }
 
 section .menu-bar{
