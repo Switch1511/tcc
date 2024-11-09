@@ -7,21 +7,21 @@ const app = express();
 const port = 3000;
 const path = require('path');
 
-// Middleware para interpretar JSON no corpo da requisição
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../front')));
 
-// Configuração de conexão com o banco de dados MySQL
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Commandos11!',
-    database: 'conecta_pinhais'
+    host: 'sql10.freesqldatabase.com',
+    user: 'sql10743687',
+    port: 3306,
+    password: 'JAJVNyBTzu',
+    database: 'sql10743687',
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-// Verifica a conexão com o banco de dados
 db.connect((err) => {
     if (err) {
         console.error('Erro ao conectar ao banco de dados:', err);
@@ -31,19 +31,16 @@ db.connect((err) => {
 });
 
 
-
 app.use(cors());
 
 app.post('/usuarios', (req, res) => {
     const { nome, email, senha } = req.body;
 
-    // Verifica se todos os campos foram preenchidos
     if (!nome || !email || !senha) {
         console.log('Campos obrigatórios não preenchidos:', req.body);
         return res.status(400).send('Todos os campos são obrigatórios.');
     }
 
-    // Verifica se o e-mail já está cadastrado
     const checkEmailQuery = 'SELECT * FROM usuarios WHERE email = ?';
     db.query(checkEmailQuery, [email], (err, result) => {
         if (err) {
@@ -56,16 +53,12 @@ app.post('/usuarios', (req, res) => {
             return res.status(400).send('Este e-mail já está cadastrado.');
         }
 
-        // Gera um hash da senha
         bcrypt.hash(senha, 10, (err, hash) => {
             if (err) {
                 console.error('Erro ao gerar hash da senha:', err);
                 return res.status(500).send('Erro ao processar a senha.');
             }
 
-            console.log('Hash gerado:', hash);
-
-            // Insere o novo usuário no banco de dados
             const insertUserQuery = 'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)';
             db.query(insertUserQuery, [nome, email, hash], (err, result) => {
                 if (err) {
@@ -79,7 +72,7 @@ app.post('/usuarios', (req, res) => {
     });
 });
 
-// Função para verificar o token JWT
+
 const authenticateToken = (req, res, next) => {
     // Obtém o token e remove a parte 'Bearer '
     const token = req.headers['authorization']?.split(' ')[1]; // Usando split
@@ -97,7 +90,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// Endpoint para login de usuário (gera um token JWT)
+
 app.post('/login', (req, res) => {
     const { email, senha } = req.body;
     const getUserQuery = 'SELECT * FROM usuarios WHERE email = ?';
@@ -142,13 +135,26 @@ app.post('/artigos', (req, res) => {
 
 // Endpoint para ler todos os artigos do usuário logado
 app.get('/artigos', (req, res) => {
-    const autor_id = 1;
-
-    const getArticlesQuery = 'SELECT * FROM artigos WHERE autor_id = ?';
-    db.query(getArticlesQuery, [autor_id], (err, results) => {
+    console.log('Endpoint /artigos chamado');
+    const getArticlesQuery = 'SELECT * FROM artigos';
+    db.query(getArticlesQuery, (err, results) => {
         if (err) return res.status(500).send('Erro ao obter artigos.');
-
         res.json(results);
+    });
+});
+
+app.get('/artigos/:id', (req, res) => {
+    const { id } = req.params;
+    
+    const getArticleQuery = 'SELECT * FROM artigos WHERE id = ?';
+    db.query(getArticleQuery, [id], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Erro ao buscar artigo.' });
+        
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Artigo não encontrado.' });
+        }
+
+        res.json(results); // Retorna o artigo encontrado
     });
 });
 
