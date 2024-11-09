@@ -136,11 +136,14 @@ app.post('/artigos', (req, res) => {
 // Endpoint para ler todos os artigos do usuário logado
 app.get('/artigos', (req, res) => {
     console.log('Endpoint /artigos chamado');
-    const getArticlesQuery = 'SELECT * FROM artigos';
-    db.query(getArticlesQuery, (err, results) => {
-        if (err) return res.status(500).send('Erro ao obter artigos.');
-        res.json(results);
-    });
+    
+    setTimeout(() => {
+        const getArticlesQuery = 'SELECT * FROM artigos';
+        db.query(getArticlesQuery, (err, results) => {
+            if (err) return res.status(500).send('Erro ao obter artigos.');
+            res.json(results);
+        });
+    }, 1000); // 1 segundo de delay
 });
 
 app.get('/artigos/:id', (req, res) => {
