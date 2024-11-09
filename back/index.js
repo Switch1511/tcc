@@ -12,6 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../front')));
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../front/index.html'));
+  });
+
 const db = mysql.createConnection({
     host: 'sql10.freesqldatabase.com',
     user: 'sql10743687',
