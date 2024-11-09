@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     function fetchArticles() {
-        fetch('/artigos')
+        fetch('http://localhost:3000/artigos')
             .then(response => response.json())
             .then(articles => {
                 const container = document.getElementById('article-container');
