@@ -71,7 +71,7 @@
         // Função para buscar os detalhes do artigo
         async function fetchArtigo() {
             try {
-                const response = await fetch(`'http://localhost:3000/artigos/${artigoId}`);
+                const response = await fetch(`http://localhost:3000/artigos/${artigoId}`);
                 if (!response.ok) throw new Error('Erro ao buscar o artigo.');
                 const artigo = await response.json();
 
