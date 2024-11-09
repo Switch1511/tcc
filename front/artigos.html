@@ -92,7 +92,7 @@
     <script>
         // Função para buscar e listar os artigos
         function loadArticles() {
-            fetch('http://localhost:3000/artigos')
+            fetch('/artigos')
                 .then(response => response.json())
                 .then(data => {
                     const articleList = document.getElementById('articleList');
@@ -140,7 +140,7 @@
         // Função para excluir um artigo
         function deleteArticle(id) {
             if (confirm('Você tem certeza que deseja excluir este artigo?')) {
-                fetch(`http://localhost:3000/artigos/${id}`, {
+                fetch(`/artigos/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -170,7 +170,7 @@
             const conteudo = document.getElementById('conteudo').value;
 
             const method = id ? 'PUT' : 'POST';
-            const url = id ? `http://localhost:3000/artigos/${id}` : 'http://localhost:3000/artigos';
+            const url = id ? `/artigos/${id}` : '/artigos';
 
             fetch(url, {
                 method: method,
