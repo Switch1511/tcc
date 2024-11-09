@@ -193,6 +193,8 @@ app.delete('/artigos/:id', authenticateToken, (req, res) => {
 });
 
 // Inicia o servidor
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Servidor rodando na porta ${port}`);
+// });
+
+module.exports = app;
