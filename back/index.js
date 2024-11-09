@@ -103,7 +103,7 @@ app.post('/login', (req, res) => {
         }
 
         const user = result[0];
-
+  
         bcrypt.compare(senha, user.senha, (err, match) => {
             if (err) return res.status(500).send('Erro no servidor.');
 
