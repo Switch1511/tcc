@@ -197,4 +197,6 @@ app.delete('/artigos/:id', authenticateToken, (req, res) => {
 //     console.log(`Servidor rodando na porta ${port}`);
 // });
 
-module.exports = app;
+app.listen(port, () => console.log(`Server is  running on port ${port}`))
+
+// module.exports = app;
