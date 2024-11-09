@@ -103,7 +103,7 @@ app.post('/login', (req, res) => {
         }
 
         const user = result[0];
-  
+
         bcrypt.compare(senha, user.senha, (err, match) => {
             if (err) return res.status(500).send('Erro no servidor.');
 
@@ -136,14 +136,11 @@ app.post('/artigos', (req, res) => {
 // Endpoint para ler todos os artigos do usuário logado
 app.get('/artigos', (req, res) => {
     console.log('Endpoint /artigos chamado');
-    
-    setTimeout(() => {
-        const getArticlesQuery = 'SELECT * FROM artigos';
-        db.query(getArticlesQuery, (err, results) => {
-            if (err) return res.status(500).send('Erro ao obter artigos.');
-            res.json(results);
-        });
-    }, 1000); // 1 segundo de delay
+    const getArticlesQuery = 'SELECT * FROM artigos';
+    db.query(getArticlesQuery, (err, results) => {
+        if (err) return res.status(500).send('Erro ao obter artigos.');
+        res.json(results);
+    });
 });
 
 app.get('/artigos/:id', (req, res) => {
