@@ -85,6 +85,10 @@ pre {
     overflow-wrap: break-word;
 }
 
+a {
+    text-decoration: none;
+}
+
 .news-card {
     border: none;
     position: relative;
@@ -106,16 +110,29 @@ pre {
 .news-card .card-body {
     padding: 0;
 }
-.news-card .category {
-    color: #283548;
-    margin-top: 12px;
+
+.first-category {
+    color: #ffffff;
+    margin-top: 8px;
     text-transform: uppercase;
     margin-bottom: 2px;
 }
-.news-card .card-title {
-    color: #283548;
-    font-size: 16px;
+.first-card-title{
+    color: #ffffff;
+    font-size: 18px;
 }
+
+.category {
+    color: #283548;
+    margin-top: 8px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+.card-title{
+    color: #283548;
+    font-size: 18px;
+}
+
 .featured .text-overlay {
     position: absolute;
     bottom: 0;

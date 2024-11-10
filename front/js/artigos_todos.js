@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 container.innerHTML = '';
 
-                const maxLengthContent = 35;
-                const maxLengthTitle = 20;
+                const maxLengthContent = 100;
+                const maxLengthTitle = 30;
 
                 for (let i = 0; i < articles.length; i++) {
                     const article = articles[i];
@@ -26,11 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     const otherArticlesHTML = `
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card news-card">
-                                <img src="./img/img2.jpeg" alt="${article.titulo}">
-                                <div class="card-body">
-                                 <h5 class="card-title">${truncatedTitle}</h5>
-                                    <p class="category">${truncatedContent}</p>
-                                </div>
+                                <a href="artigo.html?id=${article.id}">
+                                    <img src="./img/favicon.png" alt="${article.titulo}">
+                                    <div class="card-body">
+                                    <h5 class="card-title">${truncatedTitle}</h5>
+                                        <p class="category">${truncatedContent}</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     `;

@@ -31,7 +31,7 @@
                                 <a class="nav-link" href="#">Colaboradores</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="login.html" style="padding-right: 26px; padding-left: 26px; border-radius: 8px;background-color: #4177ff; border: 1px solid #4177ff;">Login</a>
+                                <a class="nav-link" id="authLink" href="login.html" style="padding-right: 26px; padding-left: 26px; border-radius: 8px;background-color: #4177ff; border: 1px solid #4177ff;">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -72,5 +72,31 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/artigos.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authLink = document.getElementById('authLink');
+            const navbar = document.querySelector('.navbar-nav');
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                authLink.textContent = 'Sair';
+                authLink.href = '#';
+                authLink.style.backgroundColor = '#ff4d4d';
+                authLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    localStorage.removeItem('token');
+                    window.location.href = 'index.html';
+                });
+
+                const addArticleItem = document.createElement('li');
+                addArticleItem.classList.add('nav-item');
+                addArticleItem.innerHTML = `
+                    <a class="nav-link" href="artigos.html" style="padding-right: 26px; padding-left: 26px; border-radius: 8px; background-color: #28a745; border: 1px solid #28a745;">Adicionar artigo</a>
+                `;
+                navbar.appendChild(addArticleItem);
+            }
+        });
+    </script>
 </body>
 </html>

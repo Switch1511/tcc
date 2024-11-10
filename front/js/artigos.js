@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 container.innerHTML = '';
 
-                const maxLengthContent = 55;
-                const maxLengthTitle = 20;
+                const maxLengthContent = 100;
+                const maxLengthTitle = 30;
 
                 // Artigo em destaque (index 0)
                 const featuredArticle = articles[0];
@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="col-lg-6 mb-4">
                         <div class="card featured">
                             <a href="artigo.html?id=${featuredArticle.id}"> <!-- Link para a página de detalhes -->
-                                <img src="./img/img1.jpeg" alt="${featuredArticle.titulo}" class="img-fluid">
+                                <img src="./img/favicon.png" alt="${featuredArticle.titulo}" class="img-fluid">
                                 <div class="text-overlay">
-                                    <h5 class="card-title">${truncatedTitle}</h5>
-                                    <p class="category">${truncatedContent}</p>
+                                    <h5 class="first-card-title">${truncatedTitle}</h5>
+                                    <p class="first-category">${truncatedContent}</p>
                              
                                 </div>
                             </a>
@@ -67,28 +67,28 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="row">
                                 <div class="col-md-6 second-card">
                                     <a href="artigo.html?id=${articles[1].id}"> <!-- Link para a página de detalhes -->
-                                        <img src="./img/img1.jpeg" alt="${articles[1].titulo}" class="img-fluid">
+                                        <img src="./img/favicon.png" alt="${articles[1].titulo}" class="img-fluid">
                                     </a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card-body">
                                         <a href="artigo.html?id=${articles[1].id}"> <!-- Link para a página de detalhes -->
-                                            <h5 class="card-title">${truncatedTitle}</h5>
+                                            <h5 class="card-title mt-1">${truncatedTitle}</h5>
                                             <p class="category">${truncatedContent}</p>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-4">
                                 <div class="col-md-6 second-card">
                                     <a href="artigo.html?id=${articles[2].id}"> <!-- Link para a página de detalhes -->
-                                        <img src="./img/img1.jpeg" alt="${articles[2].titulo}" class="img-fluid">
+                                        <img src="./img/favicon.png" alt="${articles[2].titulo}" class="img-fluid">
                                     </a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card-body">
                                         <a href="artigo.html?id=${articles[2].id}"> <!-- Link para a página de detalhes -->
-                                            <h5 class="card-title">${truncatedTitle2}</h5>
+                                            <h5 class="card-title mt-1">${truncatedTitle2}</h5>
                                             <p class="category">${truncatedContent2}</p>
                                         </a>
                                     </div>
@@ -113,13 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="row">
                                 <div class="col-md-6 second-card">
                                     <a href="artigo.html?id=${articles[1].id}"> <!-- Link para a página de detalhes -->
-                                        <img src="./img/img1.jpeg" alt="${articles[1].titulo}" class="img-fluid">
+                                        <img src="./img/favicon.png" alt="${articles[1].titulo}" class="img-fluid">
                                     </a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card-body">
                                         <a href="artigo.html?id=${articles[1].id}"> <!-- Link para a página de detalhes -->
-                                            <h5 class="card-title">${truncatedTitle}</h5>
+                                            <h5 class="card-title mt-1">${truncatedTitle}</h5>
                                             <p class="category">${truncatedContent}</p>
                                         </a>
                                     </div>
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 // Adiciona os outros artigos
-                for (let i = 3; i < articles.length; i++) {
+                for (let i = 3; i < 11; i++) {
                     const article = articles[i];
                 
          
@@ -148,9 +148,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card news-card">
                                 <a href="artigo.html?id=${article.id}"> <!-- Link para a página de detalhes -->
-                                    <img src="./img/img1.jpeg" alt="${article.titulo}">
+                                    <img src="./img/favicon.png" alt="${article.titulo}">
                                     <div class="card-body">
-                                        <h5 class="card-title">${truncatedTitle}</h5>
+                                        <h5 class="card-title mt-1">${truncatedTitle}</h5>
                                         <p class="category">${truncatedContent}</p>
                                     </div>
                                 </a>

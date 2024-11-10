@@ -31,7 +31,7 @@
                                 <a class="nav-link" href="#">Colaboradores</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="login.html" style="padding-right: 26px; padding-left: 26px; border-radius: 8px;background-color: #4177ff; border: 1px solid #4177ff;">Login</a>
+                                <a class="nav-link" id="authLink" href="login.html" style="padding-right: 26px; padding-left: 26px; border-radius: 8px;background-color: #4177ff; border: 1px solid #4177ff;">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -68,15 +68,13 @@
         const params = new URLSearchParams(window.location.search);
         const artigoId = params.get('id');
 
-        // Função para buscar os detalhes do artigo
+
         async function fetchArtigo() {
             try {
                 const response = await fetch(`/artigos/${artigoId}`);
                 if (!response.ok) throw new Error('Erro ao buscar o artigo.');
-                console.log(response)
                 const artigo = await response.json();
-                console.log(artigo)
-                // Renderizar os detalhes do artigo
+
                 const artigoDetail = document.getElementById('artigo-detail');
                 artigoDetail.innerHTML = `
                     <h2>${artigo[0].titulo}</h2>
@@ -88,6 +86,32 @@
         }
 
         fetchArtigo();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authLink = document.getElementById('authLink');
+            const navbar = document.querySelector('.navbar-nav');
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                authLink.textContent = 'Sair';
+                authLink.href = '#';
+                authLink.style.backgroundColor = '#ff4d4d';
+                authLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    localStorage.removeItem('token');
+                    window.location.href = 'index.html';
+                });
+
+                const addArticleItem = document.createElement('li');
+                addArticleItem.classList.add('nav-item');
+                addArticleItem.innerHTML = `
+                    <a class="nav-link" href="artigos.html" style="padding-right: 26px; padding-left: 26px; border-radius: 8px; background-color: #28a745; border: 1px solid #28a745;">Adicionar artigo</a>
+                `;
+                navbar.appendChild(addArticleItem);
+            }
+        });
     </script>
 </body>
 </html>
