@@ -102,6 +102,7 @@
                 return response.json(); // Retorna o JSON que contém o token
             })
             .then(data => {
+            
                 // Armazena o token no localStorage
                 localStorage.setItem('token', data.token);
                 window.location.href = 'artigos.html'; // Redireciona para a página de artigos

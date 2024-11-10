@@ -79,6 +79,11 @@ section .menu-bar .menu-option:hover{
     font-size: 1.2rem;
 }
 
+pre {
+    white-space: pre-wrap;   /* Permite quebras de linha automáticas */
+    word-wrap: break-word;   /* Quebra as palavras longas */
+    overflow-wrap: break-word;
+}
 
 .news-card {
     border: none;

@@ -91,8 +91,7 @@ app.post('/usuarios', (req, res) => {
                         }
                         return;
                     }
-
-                    console.log('Usuário cadastrado com sucesso:', result);
+                    console.log('Usuário cadastrado com sucesso:', result[0]);
                     res.status(201).send('Usuário cadastrado com sucesso.');
                 });
             });

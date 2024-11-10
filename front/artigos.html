@@ -8,6 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/global.css">
 </head>
+<style>
+    #conteudo {
+        width: 100%;
+        height: 300px;
+    }
+</style>
 <body>
     <div style="flex: 1;">
         <header style="background-color: #3775D0;">
@@ -50,7 +56,7 @@
         <section class="container my-5">
             <h2 class="text-center mb-4">Gerenciar Artigos</h2>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <form id="articleForm">
                         <input type="hidden" id="articleId">
                         <div class="mb-3">
@@ -96,14 +102,24 @@
                 .then(response => response.json())
                 .then(data => {
                     const articleList = document.getElementById('articleList');
-                    articleList.innerHTML = ''; // Limpa a lista
+                    articleList.innerHTML = '';
+                    const maxLengthContent = 45;
+                    const maxLengthTitle = 30;
 
                     data.forEach(article => {
+                    const truncatedContent = article.conteudo.length > maxLengthContent
+                        ? article.conteudo.slice(0, maxLengthContent) + '...'
+                        : article.conteudo;
+                
+                    const truncatedTitle = article.titulo.length > maxLengthTitle
+                        ? article.titulo.slice(0, maxLengthTitle) + '...'
+                        : article.titulo;
+
                         const li = document.createElement('li');
                         li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
 
                         const content = document.createElement('div');
-                        content.innerHTML = `<strong>${article.titulo}</strong>: ${article.conteudo}`;
+                        content.innerHTML = `<strong>${truncatedTitle}</strong>: ${truncatedContent}`;
 
                         const buttonGroup = document.createElement('div');
 
@@ -171,7 +187,7 @@
 
             const method = id ? 'PUT' : 'POST';
             const url = id ? `/artigos/${id}` : '/artigos';
-
+            document.getElementById('articleId').value = null;
             fetch(url, {
                 method: method,
                 headers: {

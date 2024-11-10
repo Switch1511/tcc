@@ -73,14 +73,14 @@
             try {
                 const response = await fetch(`/artigos/${artigoId}`);
                 if (!response.ok) throw new Error('Erro ao buscar o artigo.');
+                console.log(response)
                 const artigo = await response.json();
-
+                console.log(artigo)
                 // Renderizar os detalhes do artigo
                 const artigoDetail = document.getElementById('artigo-detail');
                 artigoDetail.innerHTML = `
-                    <h2>${artigo.titulo}</h2>
-                    <p><strong>Categoria:</strong> ${artigo.categoria}</p>
-                    <p>${artigo.conteudo}</p>
+                    <h2>${artigo[0].titulo}</h2>
+                    <pre>${artigo[0].conteudo}</pre>
                 `;
             } catch (error) {
                 console.error(error);
