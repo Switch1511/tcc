@@ -220,7 +220,7 @@ app.get('/artigos', (req, res) => {
                 console.error(`Erro ao obter artigos. Tentativa ${retries + 1}`);
                 
                 // Tentar novamente após 1 segundo se for erro 500
-                if (retries < 5) { // Limita o número de tentativas para evitar loop infinito
+                if (retries < 20) { // Limita o número de tentativas para evitar loop infinito
                     setTimeout(() => retryQuery(retries + 1), 1000);
                 } else {
                     return res.status(500).send('Erro ao obter artigos. Tentativas esgotadas.');
