@@ -136,11 +136,30 @@ app.post('/artigos', (req, res) => {
 // Endpoint para ler todos os artigos do usuário logado
 app.get('/artigos', (req, res) => {
     console.log('Endpoint /artigos chamado');
-    const getArticlesQuery = 'SELECT * FROM artigos';
-    db.query(getArticlesQuery, (err, results) => {
-        if (err) return res.status(500).send('Erro ao obter artigos.');
-        res.json(results);
-    });
+
+    // Função para tentar a consulta com retries
+    const retryQuery = (retries = 0) => {
+        const getArticlesQuery = 'SELECT * FROM artigos';
+
+        db.query(getArticlesQuery, (err, results) => {
+            if (err) {
+                console.error(`Erro ao obter artigos. Tentativa ${retries + 1}`);
+                
+                // Tentar novamente após 1 segundo se for erro 500
+                if (retries < 5) { // Limita o número de tentativas para evitar loop infinito
+                    setTimeout(() => retryQuery(retries + 1), 1000);
+                } else {
+                    return res.status(500).send('Erro ao obter artigos. Tentativas esgotadas.');
+                }
+            } else {
+                // Sucesso: retorna os resultados
+                res.json(results);
+            }
+        });
+    };
+
+    // Chama a função retryQuery pela primeira vez
+    retryQuery();
 });
 
 app.get('/artigos/:id', (req, res) => {
