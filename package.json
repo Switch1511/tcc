@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
-    "vercel-build": "npx prisma migrate deploy"
+    "dev": "nodemon src/server.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.8.0",

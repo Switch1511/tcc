@@ -12,10 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../front')));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../front/index.html'));
-  });
-
 const db = mysql.createConnection({
     host: 'sql10.freesqldatabase.com',
     user: 'sql10743687',
@@ -201,6 +197,6 @@ app.delete('/artigos/:id', authenticateToken, (req, res) => {
 //     console.log(`Servidor rodando na porta ${port}`);
 // });
 
-app.listen(port, () => console.log(`Server is  running on port ${port}`))
+app.listen(port, () => console.log("Server ready on port 3000."));
 
-// module.exports = app;
+module.exports = app;
